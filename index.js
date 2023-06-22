@@ -6,6 +6,8 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("build"));
+
 app.use(
   morgan(":method :status :res[content-length] - :response-time ms :body")
 );
@@ -80,7 +82,7 @@ app.post("/api/persons", (request, response) => {
   persons = persons.concat(person);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
